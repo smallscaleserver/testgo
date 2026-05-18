@@ -8,5 +8,5 @@ func main() {
 	fmt.Scan(&a)
 	fmt.Print("Enter b: ")
 	fmt.Scan(&b)
-	fmt.Printf("a*a+2*a*b+b*b = %d\n", a*a+2*a*b+b*b)
+	fmt.Printf("a + b * a = %d\n", a+b*a)
 }
