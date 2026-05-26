@@ -1,18 +1,28 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math"
+	"os"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	var a, b, c float64
+	scanner := bufio.NewScanner(os.Stdin)
+
 	fmt.Print("Enter first number (a): ")
-	fmt.Scanf("%f", &a)
+	scanner.Scan()
+	a, _ := strconv.ParseFloat(strings.TrimSpace(scanner.Text()), 64)
+
 	fmt.Print("Enter second number (b): ")
-	fmt.Scanf("%f", &b)
+	scanner.Scan()
+	b, _ := strconv.ParseFloat(strings.TrimSpace(scanner.Text()), 64)
+
 	fmt.Print("Enter third number (c): ")
-	fmt.Scanf("%f", &c)
+	scanner.Scan()
+	c, _ := strconv.ParseFloat(strings.TrimSpace(scanner.Text()), 64)
 
 	result := math.Pow(a, b) + c
 	fmt.Printf("Result: %.0f^%.0f + %.0f = %.0f\n", a, b, c, result)
