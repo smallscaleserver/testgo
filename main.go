@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"math"
+	"math/big"
 	"os"
 	"strconv"
 	"strings"
@@ -14,16 +14,33 @@ func main() {
 
 	fmt.Print("Enter first number (a): ")
 	scanner.Scan()
-	a, _ := strconv.ParseFloat(strings.TrimSpace(scanner.Text()), 64)
+	aStr := strings.TrimSpace(scanner.Text())
 
 	fmt.Print("Enter second number (b): ")
 	scanner.Scan()
-	b, _ := strconv.ParseFloat(strings.TrimSpace(scanner.Text()), 64)
+	bStr := strings.TrimSpace(scanner.Text())
 
 	fmt.Print("Enter third number (c): ")
 	scanner.Scan()
-	c, _ := strconv.ParseFloat(strings.TrimSpace(scanner.Text()), 64)
+	cStr := strings.TrimSpace(scanner.Text())
 
-	result := math.Pow(a, b) + c
-	fmt.Printf("Result: %.0f^%.0f + %.0f = %.0f\n", a, b, c, result)
+	// Parse a as big.Int
+	a := new(big.Int)
+	a.SetString(aStr, 10)
+
+	// Parse b as int (exponent must be integer)
+	b, _ := strconv.Atoi(bStr)
+
+	// Parse c as big.Int
+	c := new(big.Int)
+	c.SetString(cStr, 10)
+
+	// Calculate a^b using big.Int.Exp()
+	result := new(big.Int)
+	result.Exp(a, big.NewInt(int64(b)), nil)
+
+	// Add c to result
+	result.Add(result, c)
+
+	fmt.Printf("Result: %s^%d + %s = %s\n", aStr, b, cStr, result.String())
 }
